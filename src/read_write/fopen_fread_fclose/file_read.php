@@ -1,7 +1,7 @@
 <?php
 
 // set file to read
-$file = "../../webdictionary.txt" or die('Could not open file!');
+$file = "../webdictionary.txt" or die('Could not open file!');
 
 // open file
 $fh = fopen($file, 'r') or die('Could not open file!');
