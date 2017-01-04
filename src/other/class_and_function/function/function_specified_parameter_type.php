@@ -1,5 +1,6 @@
 <?php
 
+// parameter must be an array
 function one (array $array) {
     var_dump($array);
 }
