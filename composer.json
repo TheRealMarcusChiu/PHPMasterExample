@@ -1,0 +1,16 @@
+{
+    "name": "marcus.chiu/basic-php",
+    "description": "marcus's custom description",
+    "authors": [
+        {
+            "name": "Marcus Chiu",
+            "email": "marcus.chiu@kibocommerce.com"
+        }
+    ],
+    "require": {
+        "monolog/monolog": "^1.22",
+        "aws/aws-sdk-php": "^3.20"
+    },
+    "require-dev": {
+    }
+}

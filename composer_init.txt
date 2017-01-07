@@ -1,0 +1,13 @@
+A. create basic composer.json file in current directory
+     composer init
+
+B. Install the dependencies by running composer’s install command
+     composer install —no-dev
+
+     this would create a vendor directory in your project with the required libraries and an auto loader used to load them into the project.
+
+C. Require composers auto loader in to your PHP script with
+     require ‘/path/to/sdk/vendor/autoload.php’;
+
+D. optional - Updating packages
+     composer update —no-dev
