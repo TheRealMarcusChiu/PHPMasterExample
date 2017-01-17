@@ -1,6 +1,6 @@
 <?php
 // Include the SDK using the Composer autoloader
-require '../../vendor/autoload.php';
+require '../../../vendor/autoload.php';
 
 // Use the us-west-2 region and latest version of each client.
 $sharedConfig = [

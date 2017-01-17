@@ -1,6 +1,6 @@
 <?php
 // Include the SDK using the Composer autoloader
-require '../../../vendor/autoload.php';
+require '../../../../vendor/autoload.php';
 
 $search_end_point = 'https://search-jesus-pcd4bjnkk3df3umdxvbd6bod3m.us-west-2.cloudsearch.amazonaws.com';
 $document_end_point = 'https://doc-jesus-pcd4bjnkk3df3umdxvbd6bod3m.us-west-2.cloudsearch.amazonaws.com';

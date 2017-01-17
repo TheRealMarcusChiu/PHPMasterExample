@@ -10,8 +10,13 @@
     "require": {
         "monolog/monolog": "^1.22",
         "aws/aws-sdk-php": "^3.20",
+        "doctrine/common": "~2.3",
+        "doctrine/orm": "*",
         "twig/twig": "~1.0"
     },
     "require-dev": {
+    },
+    "autoload": {
+        "psr-4": {"MarcusChiu\\": "src/composer_autoload_example/class/"}
     }
 }

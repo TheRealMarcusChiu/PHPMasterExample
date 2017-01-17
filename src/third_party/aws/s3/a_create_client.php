@@ -1,6 +1,6 @@
 <?php
 // Include the SDK using the Composer autoloader
-require '../../../vendor/autoload.php';
+require '../../../../vendor/autoload.php';
 
 // Create AWS/SDK object
 $sharedConfig = [
