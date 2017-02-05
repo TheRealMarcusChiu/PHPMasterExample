@@ -12,7 +12,8 @@
         "aws/aws-sdk-php": "^3.20",
         "doctrine/common": "~2.3",
         "doctrine/orm": "*",
-        "twig/twig": "~1.0"
+        "twig/twig": "~1.0",
+        "jms/serializer": "^1.4"
     },
     "require-dev": {
     },
