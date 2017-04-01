@@ -3,7 +3,7 @@
 
 require_once '../../../../vendor/autoload.php';
 
-$someWritableDir = "/Users/marcus.chiu/ComputerScience/PHP/PHPStorm/PHPStormProjects/Example/BasicPHP/src/third_party/jms/cache/tmp";
+$someWritableDir = "/Users/marcus.chiu/ComputerScience/PHP/PHPStorm/PHPStormProjects/Example/BasicPHP/src/third.party/jms/cache/tmp";
 $builder = new JMS\Serializer\SerializerBuilder();
 $serializer =
     JMS\Serializer\SerializerBuilder::create()

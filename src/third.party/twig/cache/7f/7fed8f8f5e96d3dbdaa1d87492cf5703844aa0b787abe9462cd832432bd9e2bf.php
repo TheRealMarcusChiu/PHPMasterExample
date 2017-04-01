@@ -59,6 +59,6 @@ class __TwigTemplate_7b1946fb3e87264984882de211e10a063d6a1e8898454db8de51adb2667
 
     public function getSourceContext()
     {
-        return new Twig_Source("", "index.html", "/Users/marcus.chiu/ComputerScience/PHP/PHPStorm/PHPStormProjects/Example/BasicPHP/src/third_party/twig/templates/index.html");
+        return new Twig_Source("", "index.html", "/Users/marcus.chiu/ComputerScience/PHP/PHPStorm/PHPStormProjects/Example/BasicPHP/src/third.party/twig/templates/index.html");
     }
 }
