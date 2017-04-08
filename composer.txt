@@ -1,4 +1,4 @@
 "require-dev" - are packages that aren't necessary for your project to work and
                 that shouldn't be included in the production version of your project.
-              - Typically, these are packages such as phpunit/phpunit that you would
+              - Typically, these are packages such as phpunit/phpunit and/or Mockery/Mockery that you would
                 use for unit testing your project

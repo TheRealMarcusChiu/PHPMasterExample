@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: marcus.chiu
- * Date: 2017-03-27
- * Time: 4:43 PM
- */
 
 require_once 'Email.php';
 

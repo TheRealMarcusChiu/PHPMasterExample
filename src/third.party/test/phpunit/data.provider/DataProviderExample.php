@@ -1,13 +1,6 @@
 <?php
 
-/**
- * Created by PhpStorm.
- * User: marcus.chiu
- * Date: 2017-03-28
- * Time: 8:33 AM
- */
 use PHPUnit\Framework\TestCase;
-
 
 class DataProviderExample extends TestCase
 {
@@ -24,7 +17,8 @@ class DataProviderExample extends TestCase
 		return array(
 			array('Hello, World!', 'Hello, World!'),
 			array('', ''),
-			['jesus', 'jesus']
+			['jesus', 'jesus'],
+			[[1,2], [1,2]]
 		);
 	}
 }
