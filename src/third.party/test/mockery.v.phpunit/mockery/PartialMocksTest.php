@@ -7,33 +7,29 @@ class ReturningValuesTest extends PHPUnit_Framework_TestCase {
 	}
 
 	function testSimpleReturnValue() {
-		$value = 3;
-		$multiplier = 2;
-		$expectedResult = 6;
-
 		// Mockery
-		$mockeryMock = \Mockery::mock(new Calculator());
-		$mockeryMock->shouldReceive('add')->andReturn($expectedResult);
+		$mockeryMock = \Mockery::mock(Greeter::class)
+			->shouldAllowMockingProtectedMethods()
+			->makePartial();
 
-		$actualResult = $mockeryMock->multiply($value, $multiplier);
+		$mockeryMock->shouldReceive('functionToBeMocked')->with("hello")->andReturn("Ha! Mocked IT!");
+		$mockeryMock->name = "Jesus";
 
-		$this->assertEquals($expectedResult, $actualResult);
+		$mockeryMock->greet();
 	}
 
 }
 
-class Calculator {
-	function add($firstNo, $secondNo) {
-		return $firstNo + $secondNo;
+class Greeter {
+
+	public $name = "Marcus";
+
+	protected function functionToBeMocked($hello) {
+		return "Hello, World! Again!\n";
 	}
 
-	function multiply($value, $multiplier) {
-		$newValue = 0;
-
-		for($i=0; $i<$multiplier; $i++) {
-			$newValue = $this->add($newValue, $value);
-		}
-
-		return $newValue;
+	function greet() {
+		echo "Hello, I'm " . $this->name . "\n";
+		echo $this->functionToBeMocked("hello");
 	}
 }
