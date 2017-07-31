@@ -6,72 +6,95 @@ class DealingWithConstructorParamsTest extends \PHPUnit_Framework_TestCase {
 		\Mockery::close();
 	}
 
+
 	//////////////////////////////////////////
 	// With No parent::__constructor() call //
 	//////////////////////////////////////////
 
+	/**
+	 * Do not call constructor
+	 */
 	function testConstructorParams() {
-		$expectedName = "Marcus Chiu";
+		$noConstructorCall = \Mockery::mock(User::class)
+			->shouldAllowMockingProtectedMethods()->makePartial();
 
-		// Do not call constructor
-		$noConstructorCall = \Mockery::mock(User::class);
-		$noConstructorCall->shouldReceive('getName')->andReturn($expectedName);
+		$beforeMockActualName = $noConstructorCall->protectedGetName();
+		$this->assertEquals(" ", $beforeMockActualName);
+
+		$noConstructorCall->shouldReceive('protectedGetName')->andReturn("Erina Chiu");
+		$afterMockActualName = $noConstructorCall->protectedGetName();
+		$this->assertEquals("Erina Chiu", $afterMockActualName);
 	}
 
+	/**
+	 * Use constructor parameters
+	 */
 	function testConstructorParams2() {
-		$firstName = "Marcus";
-		$lastName = "Chiu";
-		$expectedName = "Marcus Chiu";
+		// Mockery::mock(User::class, ["Marcus", "Chiu"]) works too
+		$withConstructParams = \Mockery::mock('User[protectedGetName]', ["Marcus", "Chiu"])
+			->shouldAllowMockingProtectedMethods()->makePartial();
 
-		// Use constructor parameters
-		$withConstructParams = \Mockery::mock('User[protectedGetName]', [$firstName, $lastName])
-			->shouldAllowMockingProtectedMethods();
-		$withConstructParams->shouldReceive('protectedGetName')->andReturn($expectedName);
+		$beforeMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Marcus Chiu", $beforeMockActualName);
 
-		$actualName = $withConstructParams->protectedGetName();
-
-		$this->assertEquals($expectedName, $actualName);
+		$withConstructParams->shouldReceive('protectedGetName')->andReturn("Erina Chiu");
+		$afterMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Erina Chiu", $afterMockActualName);
 	}
 
+	/**
+	 * User real object with real values and mock over it
+	 * TODO the mocked object does not actually carry over the instance fields
+	 */
 	function testContructorParams3() {
-		$firstName = "Marcus";
-		$lastName = "Chiu";
 		$expectedName = "Marcus Chiu";
 
-		// User real object with real values and mock over it
-		$realUser = new User($firstName, $lastName);
+		$realUser = new User("Marcus", "Chiu");
 		$mockRealObj = \Mockery::mock($realUser);
 		$mockRealObj->shouldReceive('getName')->andReturn($expectedName);
-
-		// TODO the mocked object does not actually carry over the instance fields
 	}
+
 
 	///////////////////////////////////////
 	// With parent::__constructor() call //
 	///////////////////////////////////////
 
-	function testParentConstructorParams2() {
-		$firstName = "Marcus";
-		$lastName = "Chiu";
-		$expectedName = "Marcus Chiu";
+	/**
+	 * Use constructor parameters
+	 */
+	function testParentConstructorParams1() {
+		$withConstructParams = \Mockery::mock(Admin::class, ["Marcus", "Chiu"])
+			->shouldAllowMockingProtectedMethods()->makePartial();
 
-		// Use constructor parameters
-		$withConstructParams = \Mockery::mock(Admin::class, [$firstName, $lastName])
-			->shouldAllowMockingProtectedMethods();
-		$withConstructParams->shouldReceive('protectedGetName')->andReturn($expectedName);
+		$beforeMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Marcus Chiu", $beforeMockActualName);
 
-		$actualName = $withConstructParams->protectedGetName();
-
-		$this->assertEquals($expectedName, $actualName);
+		$withConstructParams->shouldReceive('protectedGetName')->andReturn("Erina Chiu");
+		$afterMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Erina Chiu", $afterMockActualName);
 	}
 
-	function testParentConstructor3() {
-		$firstName = "Marcus";
-		$lastName = "Chiu";
-		$expectedName = "Marcus Chiu";
+	/**
+	 * Use constructor parameters
+	 */
+	function testParentConstructorParams2() {
+		$withConstructParams = \Mockery::mock(Admin::class, ["Marcus", "Chiu"])
+			->shouldAllowMockingProtectedMethods()->makePartial();
 
-		// User real object with real values and mock over it
-		$realUser = new Admin($firstName, $lastName);
+		$beforeMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Marcus Chiu", $beforeMockActualName);
+
+		$withConstructParams->shouldReceive('protectedGetName')->andReturn("Erina Chiu");
+		$afterMockActualName = $withConstructParams->protectedGetName();
+		$this->assertEquals("Erina Chiu", $afterMockActualName);
+	}
+
+	/**
+	 * User real object with real values and mock over it
+	 * TODO the mocked object does not actually carry over the instance fields
+	 */
+	function testParentConstructorParams3() {
+		$realUser = new Admin("Marcus", "Chiu");
 		$mockRealObj = \Mockery::mock($realUser);
 	}
 }
@@ -83,10 +106,13 @@ class User {
 	function __construct($firstName, $lastName) {
 		$this->firstName = $firstName;
 		$this->lastName = $lastName;
-		$this->getName();
+
+		// test cases for mocking Admin::class
+		// $temp = $this->getName();          // cannot call public functions
+		$temp = $this->protectedGetName(); // can call protected functions
 	}
 
-	public function getName() {
+	function getName() {
 		return $this->firstName . ' ' . $this->lastName;
 	}
 
